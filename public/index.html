@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="main unvisible">
+    <div class="chatBody">
+        <ul id="mainText">
+        </ul>
+    </div>
+    <div class="inputMessageBlock">
+        <div>
+            <div class="messagePretextBlock">
+                <b>Enter message:</b>
+            </div>
+            <input class="inputMessage" type="text" size="40">
+        </div>
+    </div>
+</div>
+
+<div class="login page">
+    <div class="form">
+        <h3 class="title">Enter your nickname!</h3>
+        <input class="usernameInput" type="text" maxlength="14" />
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/main.js"></script>
+</body>
+</html>
