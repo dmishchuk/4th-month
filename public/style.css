@@ -1,9 +1,15 @@
-html, body {
+body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: rgb(253, 252, 229);
+    background-color: white;
+    background-image: url("81.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    width: 100%;
+
 }
+
 .main{
     height: 100%;
     width: 100%;
@@ -11,7 +17,7 @@ html, body {
 }
 .chatBody{
     min-height: 400px;
-    height: 81%;
+    height: 65%;
     overflow-y: auto;
     margin-left: 17%;
     margin-bottom: 2%;
@@ -20,15 +26,13 @@ html, body {
 
 }
 .inputMessage{
-    border: 7px solid #7497E0;
-    font-size: 150%;
-    width: 75%;
-    display: inline-block;
-    background-color: white;
+    width: 60%;
 }
 .messagePretextBlock{
     margin-left: 3%;
+    margin-top: 1%;
     width: 15%;
+    color:white;
     display: inline-block;
 }
 .page {
@@ -72,7 +76,7 @@ html, body {
     display: none;
 }
 .thisUser{
-    color: red;
+    color: #ed9c28;
     font-size: 130%;
 }
 .thatUser{
@@ -80,5 +84,53 @@ html, body {
     font-size: 110%;
 }
 #mainText{
+    color: white;
     list-style: none;
+}
+#VK-enter{
+    font-size: 20px;
+}
+.vk-class{
+    margin-top: 2%;
+}
+#inputFile{
+    margin: 1% 0 0 18%;
+    padding-left: 3px;
+}
+.photos{
+    display: inline-block;
+}
+.photos-block{
+    margin-left: 16%;
+}
+.hello-user{
+    font-family: Trebuchet MS;
+    color: white;
+    text-align: center;
+}
+.login-position{
+    font-family: Trebuchet MS;
+    padding-top: 15%;
+}
+.sing-in-position{
+    text-align: center;
+    color: white;
+}
+.vk-button{
+    margin: 0 auto;
+}
+.message{
+    color: white;
+}
+.input-message{
+
+}
+#send-file{
+    color: white;
+    display: inline-block;
+}
+#send-message{
+    background-color: #ed9c28;
+    cursor: pointer;
+    color: white;
 }

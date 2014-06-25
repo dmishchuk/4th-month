@@ -1,37 +1,93 @@
-<!doctype html>
-<html>
+﻿<html>
 <head>
     <meta charset="UTF-8">
     <title>Chat</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
 </head>
-<body>
+<body ng-app="myUser"> <!--ng-controller="MainCtrl"-->
 
-<div class="main unvisible">
-    <div class="chatBody">
-        <ul id="mainText">
-        </ul>
-    </div>
-    <div class="inputMessageBlock">
-        <div>
-            <div class="messagePretextBlock">
-                <b>Enter message:</b>
+    <div class="main unvisible" ng-controller="LoginController">
+        <h2 class="hello-user">
+            {{"Hello, " + data.login + "!"}}
+        </h2>
+
+        <div ng-controller="MessageController">
+
+            <div class="chatBody">
+                <ul id="mainText">
+                    <li ng-repeat="mes in messages">
+                        <b class='thisUser'>{{data.login}}</b> : <span class="message">{{mes}}</span>
+                    </li>
+                </ul>
             </div>
-            <input class="inputMessage" type="text" size="40">
+
+            <div class="inputMessageBlock">
+                <div>
+                    <div class="messagePretextBlock">
+                        <b>Enter message:</b>
+                    </div>
+                    <div class="row">
+                        <div class="input-group col-xs-8 col-sm-8 col-md-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2">
+                            <input type="text" class="form-control inputMessage" ng-model="mes" send>
+                            <span class="input-group-addon" id="send-message" ng-click="addMessage(mes)">Send</span>
+                        </div>
+                    </div>
+                    <!--
+                    <input send class="inputMessage" type="text" size="40" ng-model="mes">
+                    <button ng-click="addMessage(mes)">Отправить</button>
+                    -->
+                    <div class="messagePretextBlock">
+                        <b>Load photos:</b>
+                    </div>
+                    <form enctype="multipart/form-data" method="post"  class="photos-block">
+                        <div class="photos">
+                            <input type="file" id="send-file" name="photo" multiple accept="image/*,image/jpeg">
+                            <input type="submit" value="Отправить" class="btn btn-warning"></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="login page">
-    <div class="form">
-        <h3 class="title">Enter your nickname!</h3>
-        <input class="usernameInput" type="text" maxlength="14" />
+
+    <div class="container login-position" ng-controller="LoginController">
+
+        <form class="form-signin" role="form">
+            <h2 class="form-signin-heading sing-in-position">Please sign in</h2>
+            <br>
+            <input type="text" class="form-control usernameInput1" placeholder="Enter login" ng-model="data.login" enter>
+            <br>
+            <button class="btn btn-lg btn-warning btn-block" type="submit">Sign in</button>
+            <br>
+            <div class="row">
+                <a id="VK-enter" class="btn btn-default btn-lg col-xs-2 col-sm-2 col-md-2 col-xs-offset-5 col-sm-offset-5 col-md-offset-5" href="/auth/vk/callback" role="button">Войти через VK</a>
+            </div>
+        </form>
+
     </div>
-</div>
 
 
+<!--
+    <div class="login page" ng-controller="LoginController">
+        <div class="form">
+            <h3  class="title">Enter your nickname!</h3>
+            <div>
+                <input enter class="usernameInput" ng-model="data.login" type="text" maxlength="14" />
+            </div>
+            <div class="vk-class">
+                <a class="title" id="VK-enter" href="/auth/vk/callback">Войти через ВК</a>
+            </div>
+        </div>
+    </div>
+-->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
+<!--
 <script src="/main.js"></script>
+-->
+<script src="/app.js"></script>
 </body>
 </html>

@@ -12,36 +12,35 @@ var server = http.createServer(app);
 var io = require('socket.io')(server);
 var users = [];
 var username = {};
+var log = {};
+//var socketIo = io;
+var addedUser;
 var mongoose = require('mongoose');
-//var User = mongoose.model('user');
 var passport = require('passport');
 var VKontakteStrategy = require('passport-vkontakte').Strategy;
 var util = require('util');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-
 app.use(cookieParser()); // required before session.
 app.use(session({
     secret: 'secret'
-    //proxy: true // if you do SSL outside of node.
 }));
-
+var vkName;
 app.use(passport.initialize());
 app.use(passport.session());
-//app.use(app.router);
-
-
+var randtoken = require('rand-token');
+//выдать не только инфу о пользователе, но и уникальный id. при отправке сообщения отправляю и id,
+//когда отправляю сообщения на сервер, отправляю
 
 passport.use(new VKontakteStrategy({
         clientID:     4399146, // VK.com docs call it 'API ID'
         clientSecret: 'S0mZdZroSsz2ShGYkWob',
-        callbackURL:  "http://localhost:1000/auth/vkontakte/callback"
+        callbackURL:  "http://localhost:1000/auth/vk/callback"
     },
     function(accessToken, refreshToken, profile, done) {
         console.log(profile.displayName);
-        /*User.findOrCreate({ vkontakteId: profile.id }, function (err, user) {
-            return done(err, user);
-        });*/
+
+        //vkName = profile.displayName;
     }
 ));
 app.get('/auth/vkontakte', passport.authenticate('vkontakte'));
@@ -59,22 +58,11 @@ passport.deserializeUser(function (data, done) {
     }
 });
 
-app.get('/auth/vkontakte',
+app.get('/auth/vk/callback',
     passport.authenticate('vkontakte'),
     function(req, res){
-        console.log(req, res);
-        // The request will be redirected to vk.com for authentication, so
-        // this function will not be called.
+        //res.end(200);
     });
-
-
-
-
-
-
-
-
-
 
 
 
@@ -87,14 +75,40 @@ app.use(express.static(__dirname + '/public'));
 
 io.on('connection', function (socket) {
 
-    socket.on('login entered', function (data) {
-        username['username'] = data;
-        users.push(data);
-        console.log(users);
-        socket.emit('login send', username);
-        socket.broadcast.emit('username online', data);
-        //socket.emit('you online', username);
-        //socket.broadcast.emit('username online', username);
+
+    socket.on('vkPress', function(){
+        console.log('vk', vkName);
+    });
+
+    socket.on('login entered', function (login) {
+        var unique = true;
+        for(var i in username) {
+            if(username[i] === login){
+                var tempToken = i;
+                unique = false;
+            }
+        }
+        if(unique){
+            var token = randtoken.generate(16);
+            username[token] = login;
+            socket.emit('login send', username);
+            socket.emit('successful login');
+            socket.broadcast.emit('username online', login);
+            addedUser = true;
+            socket.username = login;
+        } else {
+            socket.emit('if token valid', tempToken);
+            socket.on('token not valid', function(){
+                socket.emit('wrong login');
+            });
+            socket.on('token valid', function(){
+                socket.emit('successful login');
+                socket.broadcast.emit('username online', login);
+                addedUser = true;
+                socket.username = login;
+            });
+        }
+
     });
 
     socket.on('new message', function (data) {
@@ -110,28 +124,16 @@ io.on('connection', function (socket) {
 
 
 
+    socket.on('disconnect', function () {
+        if(socket.username !== undefined){
+            socket.broadcast.emit('username offline', socket.username);
+        }
+
+    });
+
+
 });
 
 
 module.exports = function (app) {
 };
-
-
-/*
-var server = new http.Server();
-server.listen(1223, '127.0.0.1');
-server.on('request', function (req, res) {
-    res.end('go');
-});
-
-http.createServer(function (req, res) {
-    console.log(req);
-    fs.readFile(__dirname + '/html/index.html', function (err, data) {
-        if (err) throw err;
-        res.writeHead(200, {'Content-Type': 'text/html' });
-        res.write(data);
-        res.end();
-    });
-
-}).listen(1300);
-*/
