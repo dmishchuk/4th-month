@@ -2,11 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Chat</title>
+
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="bootstrap.css">
 </head>
-<body ng-app="myUser"> <!--ng-controller="MainCtrl"-->
-
+<body ng-app="myUser" ng-view> <!--ng-controller="MainCtrl"-->
+<!--
     <div class="main unvisible" ng-controller="LoginController">
         <h2 class="hello-user">
             {{"Hello, " + data.login + "!"}}
@@ -29,14 +30,11 @@
                     </div>
                     <div class="row">
                         <div class="input-group col-xs-8 col-sm-8 col-md-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2">
-                            <input type="text" class="form-control inputMessage" ng-model="mes" send>
+                            <input type="text" class="form-control inputMessage" ng-model="mes">
                             <span class="input-group-addon" id="send-message" ng-click="addMessage(mes)">Send</span>
                         </div>
                     </div>
-                    <!--
-                    <input send class="inputMessage" type="text" size="40" ng-model="mes">
-                    <button ng-click="addMessage(mes)">Отправить</button>
-                    -->
+
                     <div class="messagePretextBlock">
                         <b>Load photos:</b>
                     </div>
@@ -59,7 +57,7 @@
                 <br>
                 <input type="text" class="form-control usernameInput1" placeholder="Enter login" ng-model="data.login" enter>
                 <br>
-                <button class="btn btn-lg btn-warning btn-block" type="submit">Sign in</button>
+                <button class="btn btn-lg btn-warning btn-block" ng-click="addLogin(data.login)"  type="submit">Sign in</button>
                 <br>
                 <div class="row">
                     <a id="VK-enter" class="btn btn-default btn-lg col-xs-4 col-sm-4 col-md-4 col-xs-offset-4 col-sm-offset-4 col-md-offset-4" href="/auth/vk/callback" role="button">Войти через VK</a>
@@ -67,7 +65,7 @@
             </form>
         </div>
     </div>
-
+-->
 
 <!--
     <div class="login page" ng-controller="LoginController">
@@ -88,6 +86,15 @@
 <!--
 <script src="/main.js"></script>
 -->
+
+<script src="components/angular-route.min.js"></script>
 <script src="/app.js"></script>
+<script type="text/javascript" src="config.js"></script>
+<script src="/controllers/loginCtrl.js"></script>
+<script src="/controllers/messageCtrl.js"></script>
+<script src="/directives/login.js"></script>
+<script src="/directives/message.js"></script>
+<script src="/factories/data.js"></script>
+
 </body>
 </html>

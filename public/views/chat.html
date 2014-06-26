@@ -1,0 +1,43 @@
+<div class="main unvisible">
+    <h2 class="hello-user">
+        {{"Hello, " + data.login + "!"}}
+    </h2>
+
+    <div ng-controller="MessageController">
+
+        <div class="chatBody">
+            <ul id="mainText">
+                <li ng-repeat="mes in messages">
+                    <b class='thisUser'>{{data.login}}</b> : <span class="message">{{mes}}</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="inputMessageBlock">
+            <div>
+                <div class="messagePretextBlock">
+                    <b>Enter message:</b>
+                </div>
+                <div class="row">
+                    <div class="input-group col-xs-8 col-sm-8 col-md-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2">
+                        <input type="text" class="form-control inputMessage" ng-model="mes">
+                        <span class="input-group-addon" id="send-message" ng-click="addMessage(mes)">Send</span>
+                    </div>
+                </div>
+                <!--
+                <input send class="inputMessage" type="text" size="40" ng-model="mes">
+                <button ng-click="addMessage(mes)">Отправить</button>
+                -->
+                <div class="messagePretextBlock">
+                    <b>Load photos:</b>
+                </div>
+                <form enctype="multipart/form-data" method="post"  class="photos-block">
+                    <div class="photos">
+                        <input type="file" id="send-file" name="photo" multiple accept="image/*,image/jpeg">
+                        <input type="submit" value="Отправить" class="btn btn-warning"></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
