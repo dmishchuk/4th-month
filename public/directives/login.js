@@ -6,7 +6,7 @@ var $login = $('.login-position');
 var socket = io();
 var username;
 
-myUser.directive("enter", function() {
+angular.module('myUser').directive("enter", function() {
     return function(scope, element) {
         element.bind("keypress", function(event) {
             if(event.which === 13 && element.val() !== ''){

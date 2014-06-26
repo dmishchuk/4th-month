@@ -1,7 +1,7 @@
 /**
  * Created by dmishchuk on 26/06/2014.
  */
-myUser.directive("send", function() {
+angular.module('myUser').directive("send", function() {
     return function(scope, element) {
         element.bind("keypress", function(event) {
             console.log(username);

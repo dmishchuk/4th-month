@@ -7,7 +7,7 @@ var socket = io();
 var username;
 
 
-myUser.controller('LoginController', function ($scope, Data){
+angular.module('myUser').controller('LoginController', function ($scope, Data){
     $scope.addLogin = function(expr) {
         if(expr !== ''){
             var login = expr;
