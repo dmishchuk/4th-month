@@ -5,10 +5,10 @@ angular.module('myUser').controller('MessageController', function ($scope, Data)
     var messages = $scope.messages = [];
     $scope.login = Data.login;
     $scope.addMessage = function(expr) {
-        if($('.inputMessage').val() !== ''){
+        if(expr !== ''){
             messages.push(expr);
         }
-        $('.inputMessage').val('');
+        $scope.mes = '';
     };
     $scope.addMessageByKey = function(event, message) {
         if(event.which === 13){

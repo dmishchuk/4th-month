@@ -14,4 +14,3 @@ angular.module('myUser').controller('LoginController', function ($scope, Data){
         }
     };
 });
-//href="#/chat/{{data.login}}"
