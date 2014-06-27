@@ -29,8 +29,6 @@ var vkName;
 app.use(passport.initialize());
 app.use(passport.session());
 var randtoken = require('rand-token');
-//выдать не только инфу о пользователе, но и уникальный id. при отправке сообщения отправляю и id,
-//когда отправляю сообщения на сервер, отправляю
 
 passport.use(new VKontakteStrategy({
         clientID:     4399146, // VK.com docs call it 'API ID'
@@ -49,7 +47,6 @@ passport.serializeUser(function (user, done) {
     done(null, JSON.stringify(user));
 });
 
-
 passport.deserializeUser(function (data, done) {
     try {
         done(null, JSON.parse(data));
@@ -64,17 +61,12 @@ app.get('/auth/vk/callback',
         //res.end(200);
     });
 
-
-
 server.listen(1000, function () {
     console.log('Server listening at port 1000');
 });
 app.use(express.static(__dirname + '/public'));
 
-
-
 io.on('connection', function (socket) {
-
 
     socket.on('vkPress', function(){
         console.log('vk', vkName);
@@ -135,9 +127,6 @@ io.on('connection', function (socket) {
         }
     });
 
-
 });
 
-
-module.exports = function (app) {
-};
+module.exports = function (app) {};

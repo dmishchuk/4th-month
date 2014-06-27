@@ -12,7 +12,6 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
     socket.emit('get users');
 
     socket.on('provide users', function(names){
-        console.log(names);
         $timeout(function(){
             names.pop();
             for(var i in names){
