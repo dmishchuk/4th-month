@@ -18,9 +18,7 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
             for(var i in names){
                 users.push(names[i]);
             }
-        })
-
-        //users = names;
+        });
     });
 
     $scope.addMessage = function(expr) {
