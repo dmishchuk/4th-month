@@ -19,8 +19,9 @@ body {
     min-height: 400px;
     height: 65%;
     overflow-y: auto;
-    margin-left: 17%;
+    margin-left: 2%;
     margin-bottom: 2%;
+    display: inline-block;
 }
 .inputMessageBlock{
 
@@ -133,4 +134,12 @@ body {
     background-color: #ed9c28;
     cursor: pointer;
     color: white;
+}
+.users{
+    float: left;
+    display: inline-block;
+    width: 16%;
+    height: 65%;
+    color: white;
+    padding: 1%;
 }

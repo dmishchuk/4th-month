@@ -1,14 +1,19 @@
 <div class="main">
     <h2 class="hello-user">
-        {{"Hello, " + login + "!"}}
+        {{"Hello, " + username + "!"}}
     </h2>
 
     <div>
-
+        <ul class="users">
+            <b>Online:</b>
+            <li ng-repeat="user in users">
+                {{user}}
+            </li>
+        </ul>
         <div class="chatBody">
             <ul id="mainText">
                 <li ng-repeat="mes in messages">
-                    <b class='thisUser'>{{login}}</b> : <span class="message">{{mes}}</span>
+                    <b class='thisUser'>{{mes.user}}</b> : <span class="message">{{mes.message}}</span>
                 </li>
             </ul>
         </div>

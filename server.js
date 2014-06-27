@@ -96,6 +96,7 @@ io.on('connection', function (socket) {
             socket.broadcast.emit('username online', login);
             addedUser = true;
             socket.username = login;
+            users.push(login);
         } else {
             socket.emit('if token valid', tempToken);
             socket.on('token not valid', function(){
@@ -106,29 +107,32 @@ io.on('connection', function (socket) {
                 socket.broadcast.emit('username online', login);
                 addedUser = true;
                 socket.username = login;
+                users.push(login);
             });
         }
 
     });
 
     socket.on('new message', function (data) {
-        socket.emit('message send', {
-            mes: data['mes'],
-            user: data['user']
-        });
         socket.broadcast.emit('message send', {
-            mes: data['mes'],
+            message: data['mes'],
             user: data['user']
         });
     });
 
-
+    socket.on('get users', function(){
+        socket.emit('provide users', users);
+    });
 
     socket.on('disconnect', function () {
         if(socket.username !== undefined){
             socket.broadcast.emit('username offline', socket.username);
         }
-
+        for (var i in users) {
+            if(users[i] === socket.username){
+                users.splice(i,1);
+            }
+        }
     });
 
 
