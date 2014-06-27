@@ -4,7 +4,7 @@ angular.module('myUser').config(['$routeProvider',function($routeProvider){
             templateUrl: 'views/login.html',
             controller: 'LoginController'
         })
-        .when('/chat/:login', {
+        .when('/chat', {
             templateUrl: 'views/chat.html',
             controller: 'MessageController'
         })

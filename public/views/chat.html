@@ -1,6 +1,6 @@
 <div class="main">
     <h2 class="hello-user">
-        {{"Hello, " + data.login + "!"}}
+        {{"Hello, " + login + "!"}}
     </h2>
 
     <div>
@@ -8,7 +8,7 @@
         <div class="chatBody">
             <ul id="mainText">
                 <li ng-repeat="mes in messages">
-                    <b class='thisUser'>{{data.login}}</b> : <span class="message">{{mes}}</span>
+                    <b class='thisUser'>{{login}}</b> : <span class="message">{{mes}}</span>
                 </li>
             </ul>
         </div>

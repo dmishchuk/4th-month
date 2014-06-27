@@ -1,10 +1,11 @@
 /**
  * Created by dmishchuk on 26/06/2014.
  */
-angular.module('myUser').controller('LoginController', function ($scope){
+angular.module('myUser').controller('LoginController', function ($scope, Data){
     $scope.addLogin = function(expr) {
         if(expr !== ''){
-            document.location.href = "/#/chat/" + expr;
+            Data.login = expr;
+            document.location.href = "/#/chat";
         }
     };
     $scope.addLoginByKey = function(event, login){
