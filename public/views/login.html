@@ -3,9 +3,9 @@
         <form class="form-signin col-xs-6 col-sm-6 col-md-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3" role="form">
             <h2 class="form-signin-heading sing-in-position">Please sign in</h2>
             <br>
-            <input type="text" class="form-control usernameInput1" placeholder="Enter login" ng-model="data.login" enter>
+            <input type="text" class="form-control usernameInput1" placeholder="Enter login" ng-model="data.login" ng-keydown="addLoginByKey($event,data.login)">
             <br>
-            <button class="btn btn-lg btn-warning btn-block" ng-click="addLogin(data.login)"  type="submit">Sign in</button>
+            <button class="btn btn-lg btn-warning btn-block" ng-click="addLogin(data.login)" type="submit">Sign in</button>
             <br>
             <div class="row">
                 <a id="VK-enter" class="btn btn-default btn-lg col-xs-4 col-sm-4 col-md-4 col-xs-offset-4 col-sm-offset-4 col-md-offset-4" href="/auth/vk/callback" role="button">Войти через VK</a>

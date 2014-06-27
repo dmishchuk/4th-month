@@ -3,7 +3,7 @@
         {{"Hello, " + data.login + "!"}}
     </h2>
 
-    <div ng-controller="MessageController">
+    <div>
 
         <div class="chatBody">
             <ul id="mainText">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="row">
                     <div class="input-group col-xs-8 col-sm-8 col-md-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2">
-                        <input type="text" class="form-control inputMessage" ng-model="mes">
+                        <input type="text" class="form-control inputMessage" ng-model="mes" ng-keydown="addMessageByKey($event, mes)">
                         <span class="input-group-addon" id="send-message" ng-click="addMessage(mes)">Send</span>
                     </div>
                 </div>

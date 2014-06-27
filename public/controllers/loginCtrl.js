@@ -1,24 +1,16 @@
 /**
  * Created by dmishchuk on 26/06/2014.
  */
-var $main = $('.main');
-var $login = $('.login-position');
-var socket = io();
-var username;
-
-
-angular.module('myUser').controller('LoginController', function ($scope, Data){
+angular.module('myUser').controller('LoginController', function ($scope){
     $scope.addLogin = function(expr) {
         if(expr !== ''){
-            var login = expr;
-            username = login;
-            console.log($scope);
-            socket.emit('login entered', login);
-            socket.on('successful login', function () {
-                $main.removeClass('unvisible');
-                $login.addClass('unvisible');
-            });
+            document.location.href = "/#/chat/" + expr;
         }
     };
-    $scope.data = Data;
+    $scope.addLoginByKey = function(event, login){
+        if(event.which === 13){
+            $scope.addLogin(login);
+        }
+    };
 });
+//href="#/chat/{{data.login}}"
