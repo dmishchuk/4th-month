@@ -7,8 +7,8 @@ angular.module('myUser').config(['$routeProvider',function($routeProvider){
         .when('/chat', {
             templateUrl: 'views/chat.html',
             controller: 'MessageController'
-        })
-        .otherwise({
+        });
+        /*.otherwise({
             redirectTo: '/'
-        })
+        })*/
 }]);

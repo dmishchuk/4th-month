@@ -5,15 +5,16 @@ var passport = require('passport');
 var VKontakteStrategy = require('passport-vkontakte').Strategy;
 var http = require('http');
 var config = require("nconf");
-var express = require('express');
+var crypto = require("crypto");
+var express = require('express.io');
 var fs = require('fs');
 var app = express();
+var md5 = require('md5');
 var server = http.createServer(app);
 var io = require('socket.io')(server);
 var users = [];
 var username = {};
 var log = {};
-//var socketIo = io;
 var addedUser;
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -29,7 +30,10 @@ var vkName;
 app.use(passport.initialize());
 app.use(passport.session());
 var randtoken = require('rand-token');
+var frondFilePath = '';
 
+app.use(express.bodyParser());
+//app.use(express.multipart());
 passport.use(new VKontakteStrategy({
         clientID:     4399146, // VK.com docs call it 'API ID'
         clientSecret: 'S0mZdZroSsz2ShGYkWob',
@@ -42,6 +46,20 @@ passport.use(new VKontakteStrategy({
     }
 ));
 app.get('/auth/vkontakte', passport.authenticate('vkontakte'));
+
+
+app.post('/fileupload', function (req, res) {
+    var uploadFilePath = req.files.file.path;
+    var uploadFileName = uploadFilePath.split("\\");
+    uploadFileName = uploadFileName[uploadFileName.length-1];
+    var filePath = 'public/uploads/' + uploadFileName;
+    frondFilePath = '/uploads/' + uploadFileName;
+    fs.readFile(uploadFilePath, function (err, data) {
+        fs.writeFile(filePath, data, function (err) {
+            res.redirect("back");
+        });
+    });
+});
 
 passport.serializeUser(function (user, done) {
     done(null, JSON.stringify(user));
@@ -103,6 +121,15 @@ io.on('connection', function (socket) {
             });
         }
 
+    });
+
+    socket.on('file loading', function(username){
+        var imMessage = {
+            'user': username,
+            'fileSource': frondFilePath
+        };
+        socket.emit('loading successful', imMessage);
+        socket.broadcast.emit('loading successful', imMessage);
     });
 
     socket.on('new message', function (data) {

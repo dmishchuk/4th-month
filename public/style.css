@@ -143,3 +143,10 @@ body {
     color: white;
     padding-left: 3%;
 }
+.photo-link{
+    color: white;
+    cursor: pointer;
+}
+.photo-link:hover{
+    color: bisque;
+}
