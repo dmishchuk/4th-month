@@ -23,7 +23,8 @@ angular.module('myUser').controller('LoginController', function ($scope, Data, $
             Data.token = i;
             Data.username = login[i];
         }
-        window.localStorage[Data.username] = Data.token;
+        window.localStorage['username'] = Data.username;
+        window.localStorage['token'] = Data.token;
     });
 
     socket.on('successful login', function(){
@@ -31,7 +32,7 @@ angular.module('myUser').controller('LoginController', function ($scope, Data, $
     });
 
     socket.on('if token valid', function(data){
-        if (window.localStorage[Data.username] === data){
+        if (window.localStorage['token'] === data){
             socket.emit('token valid');
         } else {
             socket.emit("token not valid");

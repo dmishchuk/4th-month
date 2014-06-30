@@ -138,8 +138,8 @@ body {
 .users{
     float: left;
     display: inline-block;
-    width: 16%;
+    width: 18%;
     height: 65%;
     color: white;
-    padding: 1%;
+    padding-left: 3%;
 }
