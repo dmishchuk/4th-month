@@ -1,9 +1,9 @@
 <div class="container login-position">
     <div class="row">
-        <form class="form-signin col-xs-6 col-sm-6 col-md-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3" role="form">
+        <form class="form-signin col-xs-6 col-sm-6 col-md-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3" id="sign-in-block" role="form">
             <h2 class="form-signin-heading sing-in-position">Please sign in</h2>
             <br>
-            <input type="text" class="form-control usernameInput1" placeholder="Enter login" ng-model="data.login" <!--ng-keydown="addLoginByKey($event,data.login)-->">
+            <input type="text" class="form-control usernameInput1" placeholder="Enter login" ng-model="data.login"> <!--ng-keydown="addLoginByKey($event,data.login)-->
             <br>
             <button class="btn btn-lg btn-warning btn-block" ng-click="addLogin(data.login)" type="submit">Sign in</button>
             <br>
