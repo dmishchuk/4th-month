@@ -26,7 +26,7 @@ app.use(cookieParser()); // required before session.
 app.use(session({
     secret: 'secret'
 }));
-var vkName;
+var vkName = '';
 app.use(passport.initialize());
 app.use(passport.session());
 var randtoken = require('rand-token');
@@ -40,9 +40,7 @@ passport.use(new VKontakteStrategy({
         callbackURL:  "http://localhost:1000/auth/vk/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-        console.log(profile.displayName);
-
-        //vkName = profile.displayName;
+        vkName = profile.displayName;
     }
 ));
 app.get('/auth/vkontakte', passport.authenticate('vkontakte'));
@@ -85,9 +83,14 @@ server.listen(1000, function () {
 app.use(express.static(__dirname + '/public'));
 
 io.on('connection', function (socket) {
-
-    socket.on('vkPress', function(){
-        console.log('vk', vkName);
+    vkName = '';
+    socket.on('vk-pressed', function(){
+        function temp(){
+            if(vkName !== ''){
+                socket.emit('vk-successful', vkName);
+            }
+        }
+        setTimeout(temp, 1000);
     });
 
     socket.on('login entered', function (login) {

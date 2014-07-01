@@ -16,8 +16,15 @@
                 <li ng-repeat="mes in messages">
                     <b class='thisUser'>{{mes.user}}</b> : <span class="message">{{mes.message}}</span>
                 </li>
+
                 <li ng-repeat="im in images">
-                    <b class='thisUser'>{{imUser}}</b> : <a class="photo-link" href="{{im}}">{{im}}</a>
+                    <b class='thisUser'>{{imUser}}</b> :
+                    <a href="{{im}}">
+                        <img class="image-formatting" src="({{im}})" no-repeat>
+                            <!--<p><a class="btn btn-primary btn-lg" role="button">Узнать больше</a></p>
+                            <a class="photo-link" href="{{im}}">{{im}}</a>-->
+
+                    </a>
                 </li>
             </ul>
         </div>

@@ -3,7 +3,7 @@
  */
 angular.module('myUser').factory('Data',function(){
     return {
-        login: '',
+        token: '',
         username: ''
     }
 });
