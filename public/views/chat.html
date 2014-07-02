@@ -32,25 +32,26 @@
             </div>
         </div>
 
-        <div class="col-xs-8 col-sm-8 col-md-8 chatBody" id="message-list">
-            <div class="row messageRow" ng-repeat="mes in messages" ng-switch="mes.type">
+        <div class="col-xs-8 col-sm-8 col-md-8">
+            <div class="chatBody" id="message-list">
+                <div class="row messageRow" ng-repeat="mes in messages" ng-switch="mes.type">
 
-                <div ng-switch="mes.isThis">
-                    <div class="col-md-2 messageAuthor thisAuthor" ng-switch-when="this">
-                        <span  class="pull-right">{{mes.user}}</span>
+                    <div ng-switch="mes.isThis">
+                        <div class="col-md-2 messageAuthor thisAuthor" ng-switch-when="this">
+                            <span  class="pull-right">{{mes.user}}</span>
+                        </div>
+                        <div class="col-md-2 messageAuthor" ng-switch-when="that">
+                            <span  class="pull-right">{{mes.user}}</span>
+                        </div>
                     </div>
-                    <div class="col-md-2 messageAuthor" ng-switch-when="that">
-                        <span  class="pull-right">{{mes.user}}</span>
+                    <div class="messageText col-md-10" ng-switch-when="text">
+                        {{mes.message}}
                     </div>
-
-                </div>
-                <div class="messageText col-md-10" ng-switch-when="text">
-                    {{mes.message}}
-                </div>
-                <div class="messageImage col-md-10" ng-switch-when="image">
-                    <a href="{{mes.im}}" target="_blank">
-                        <img class="image-formatting" src="{{mes.im}}">
-                    </a>
+                    <div class="messageImage col-md-10" ng-switch-when="image">
+                        <a href="{{mes.im}}" target="_blank">
+                            <img class="image-formatting" src="{{mes.im}}">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

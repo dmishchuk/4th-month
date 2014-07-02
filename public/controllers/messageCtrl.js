@@ -14,9 +14,11 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
 
     socket.on('provide users', function(names){
         $timeout(function(){
-            names.pop();
             for(var i in names){
-                users.push(names[i]);
+                if (names[i] !== Data.username){
+                    users.push(names[i]);
+                }
+
             }
         });
     });
@@ -35,7 +37,6 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
                 'mes': expr,
                 'user': Data.username
             };
-            console.log('letter', letter);
             socket.emit('new message', letter);
         }
         $scope.mes = '';
@@ -70,7 +71,6 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
         } else {
             tempStorage['isThis'] = 'that';
         }
-        console.log(tempStorage)
         $timeout(function(){
             messages.push(tempStorage);
         })
@@ -94,7 +94,6 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
 
     socket.on('message send', function(thatMessage){
         $timeout(function(){
-            console.log('mes', thatMessage);
             messages.push(thatMessage);
         })
     });

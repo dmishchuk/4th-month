@@ -3,8 +3,19 @@
  */
 angular.module('myUser').controller('LoginController', function ($scope, Data, $timeout){
 
+
     var socket = io.connect();
     $scope['data'] = {};
+
+    if(window.localStorage.token !== '' && window.localStorage.token !== undefined){
+        var tempToken = window.localStorage.token;
+        var user = window.localStorage.username;
+        socket.emit('token exist', {
+            'token': tempToken,
+            'username': user
+        });
+    }
+
     $scope.addLogin = function(expr){
         if(expr !== '' && expr !== undefined){
             Data.username = expr;
@@ -20,6 +31,18 @@ angular.module('myUser').controller('LoginController', function ($scope, Data, $
         });
 
     };
+
+    socket.on('user exist true', function(data){
+        Data.username = data.user;
+        Data.token = data.token;
+        window.localStorage['token'] = data.token;
+        window.localStorage['username'] = data.user;
+    });
+
+    socket.on('user exist false', function(){
+        delete window.localStorage['token'];
+        delete window.localStorage['username'];
+    });
 
     socket.on('login send', function (login) {
         for(var i in login){

@@ -74,7 +74,7 @@ passport.deserializeUser(function (data, done) {
 app.get('/auth/vk/callback',
     passport.authenticate('vkontakte'),
     function(req, res){
-        //res.end(200);
+
     });
 
 server.listen(1000, function () {
@@ -84,6 +84,29 @@ app.use(express.static(__dirname + '/public'));
 
 io.on('connection', function (socket) {
     vkName = '';
+
+    socket.on('token exist', function(data){
+        var exist = false;
+        for(var i in username)
+        {
+            if(i === data['token']){
+                if(username[i] = data['username']){
+                    exist = true;
+                    socket.emit('user exist true',{
+                        'user': username[i],
+                        'token': i
+                    });
+                    socket.emit('login send', username);
+                    socket.emit('successful login');
+                    socket.broadcast.emit('username online', username[i]);
+                }
+            }
+        }
+        if(!exist){
+            socket.emit('user exist false');
+        }
+    });
+
     socket.on('vk-pressed', function(){
         function temp(){
             if(vkName !== ''){

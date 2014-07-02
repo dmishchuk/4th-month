@@ -182,7 +182,7 @@
     }
     #message-list{
         padding: 0;
-        margin-left: 16%;
+        width: 100%;
         overflow-x: hidden;
     }
     .panel-body{
@@ -204,7 +204,7 @@
     }
     .messageRow{
         height: 50px;
-        margin: 5px 10px 5px 12px;
+        margin: 5px 10px 5px 50px;
         border-radius: 5px;
     }
     .messageAuthor{
