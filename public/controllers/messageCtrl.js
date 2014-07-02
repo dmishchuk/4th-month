@@ -22,19 +22,22 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
     });
 
     $scope.addMessage = function(expr) {
-        if(expr !== ''){
+        if(expr !== '' && expr !== undefined){
             var tempMessage = {
                 'user': $scope.username,
-                'message': expr
-            }
+                'message': expr,
+                'type': 'text',
+                'isThis': 'this'
+            };
+
             messages.push(tempMessage);
             var letter = {
                 'mes': expr,
                 'user': Data.username
             };
+            console.log('letter', letter);
             socket.emit('new message', letter);
         }
-
         $scope.mes = '';
     };
 
@@ -49,16 +52,27 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
             url: '/fileupload',
             file: $files[0]
         }).success(function(data, status, headers, config) {
-           socket.emit('file loading', Data.username);
+            socket.emit('file loading', Data.username);
         });
     };
 
     socket.on('loading successful', function (data) {
         var url = document.URL;
         url = url.split('#')[0];
-        $scope.imUser = data.user;
+        url = url + data.fileSource;
+        var tempStorage = {
+            'user': data.user,
+            'type': 'image',
+            'im': url
+        };
+        if(data.user === Data.username){
+            tempStorage['isThis'] = 'this';
+        } else {
+            tempStorage['isThis'] = 'that';
+        }
+        console.log(tempStorage)
         $timeout(function(){
-            images.push(url + data.fileSource);
+            messages.push(tempStorage);
         })
     });
 
@@ -80,10 +94,9 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
 
     socket.on('message send', function(thatMessage){
         $timeout(function(){
+            console.log('mes', thatMessage);
             messages.push(thatMessage);
         })
     });
-
-
 
 });

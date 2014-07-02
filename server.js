@@ -138,7 +138,9 @@ io.on('connection', function (socket) {
     socket.on('new message', function (data) {
         socket.broadcast.emit('message send', {
             message: data['mes'],
-            user: data['user']
+            user: data['user'],
+            type: 'text',
+            isThis: 'that'
         });
     });
 

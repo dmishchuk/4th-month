@@ -1,58 +1,75 @@
 <div class="main">
-    <h2 class="hello-user">
-        {{"Hello, " + username + "!"}}
-    </h2>
+    <div class="topFooter col-xs-10 col-sm-10 col-md-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+        <div class="row topFooterRow">
+            <div class="col-md-10 introducing">
 
-    <div>
-        <ul class="users">
-            <b>Online:</b>
-            <li ng-repeat="user in users">
-                {{user}}
-            </li>
-
-        </ul>
-        <div class="chatBody">
-            <ul id="mainText">
-                <li ng-repeat="mes in messages">
-                    <b class='thisUser'>{{mes.user}}</b> : <span class="message">{{mes.message}}</span>
-                </li>
-
-                <li ng-repeat="im in images">
-                    <b class='thisUser'>{{imUser}}</b> :
-                    <a href="{{im}}">
-                        <img class="image-formatting" src="({{im}})" no-repeat>
-                            <!--<p><a class="btn btn-primary btn-lg" role="button">Узнать больше</a></p>
-                            <a class="photo-link" href="{{im}}">{{im}}</a>-->
-
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="inputMessageBlock">
-            <div>
-                <div class="messagePretextBlock">
-                    <b>Enter message:</b>
+            </div>
+            <div class="topLoginFooter col-md-2">
+                <div class="btn-group userButton" dropdown is-open="status.isopen">
+                    <button type="button" class="btn btn-primary dropdown-toggle">
+                        <span class="glyphicon glyphicon-user"></span>{{' '+username}}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="row">
-                    <div class="input-group col-xs-8 col-sm-8 col-md-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2" id="enter-message">
-                        <input type="text" class="form-control inputMessage" ng-model="mes" ng-keydown="addMessageByKey($event, mes)">
-                        <span class="input-group-addon" id="send-message" ng-click="addMessage(mes)">Send</span>
-                    </div>
-                </div>
-                <!--
-                <input send class="inputMessage" type="text" size="40" ng-model="mes">
-                <button ng-click="addMessage(mes)">Отправить</button>
-                -->
-                <div class="messagePretextBlock">
-                    <b>Load photos:</b>
-                </div>
-                <form class="photos-block">
-                    <div class="photos">
-                        <input type="file" id="send-file" name="photo" multiple accept="image/*,image/jpeg"  ng-file-select="addImage($files)">
-                    </div>
-                </form>
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-2">
+            <div class="userOnline">
+                {{'Online: '}}
+            </div>
+            <div ng-repeat="user in users">
+                <div class="userOnline">
+                    {{user}}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-8 col-sm-8 col-md-8 chatBody" id="message-list">
+            <div class="row messageRow" ng-repeat="mes in messages" ng-switch="mes.type">
+
+                <div ng-switch="mes.isThis">
+                    <div class="col-md-2 messageAuthor thisAuthor" ng-switch-when="this">
+                        <span  class="pull-right">{{mes.user}}</span>
+                    </div>
+                    <div class="col-md-2 messageAuthor" ng-switch-when="that">
+                        <span  class="pull-right">{{mes.user}}</span>
+                    </div>
+
+                </div>
+                <div class="messageText col-md-10" ng-switch-when="text">
+                    {{mes.message}}
+                </div>
+                <div class="messageImage col-md-10" ng-switch-when="image">
+                    <a href="{{mes.im}}" target="_blank">
+                        <img class="image-formatting" src="{{mes.im}}">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="inputMessageBlock">
+        <div class="row">
+            <div class="input-group col-xs-8 col-sm-8 col-md-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2" id="enter-message">
+                    <span class="input-group-addon">
+                        <button class="file-input-wrapper btn  btn-lg browse">
+                            <span class="glyphicon glyphicon-upload"></span>
+                            <input type="file" class="input-file" ng-file-select="addImage($files)">
+                        </button>
+                    </span>
+                <textarea autofocus wrap="soft" type="text" class="form-control inputMessage" ng-model="mes" ng-keydown="addMessageByKey($event, mes)"></textarea>
+                <span class="input-group-addon" id="send-message" ng-click="addMessage(mes)"><span class="glyphicon glyphicon-share-alt"></span></span>
+            </div>
+        </div>
+    </div>
+</div>
 </div>

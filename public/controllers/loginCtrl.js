@@ -4,18 +4,13 @@
 angular.module('myUser').controller('LoginController', function ($scope, Data, $timeout){
 
     var socket = io.connect();
-
-    $scope.addLogin = function(expr) {
-        if(expr !== ''){
+    $scope['data'] = {};
+    $scope.addLogin = function(expr){
+        if(expr !== '' && expr !== undefined){
             Data.username = expr;
             socket.emit('login entered', expr);
         }
     };
-
-    /*$scope.addLoginByKey = function(event, login){
-        if(event.which === 13){
-        }
-    };*/
 
     $scope.addVkLogin = function(event){
         socket.emit('vk-pressed');

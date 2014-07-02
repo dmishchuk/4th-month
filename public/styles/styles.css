@@ -13,14 +13,15 @@
     .main{
         height: 100%;
         width: 100%;
+        min-width: 300px;
         position: absolute;
     }
     .chatBody{
         min-height: 400px;
-        height: 65%;
-        width: 60%;
+        height: 73%;
+        width: 68%;
         overflow-y: auto;
-        margin-left: 2%;
+        margin-left: 1%;
         margin-bottom: 2%;
         display: inline-block;
     }
@@ -82,6 +83,7 @@
     .thisUser{
         color: #ed9c28;
         font-size: 130%;
+        margin-right: 2%;
     }
     .thatUser{
         color: #7CA6E4;
@@ -90,6 +92,8 @@
     #mainText{
         color: white;
         list-style: none;
+        margin: 0;
+        padding: 0;
     }
     #VK-enter{
         font-size: 20px;
@@ -124,7 +128,7 @@
         margin: 0 auto;
     }
     .message{
-        color: white;
+        color: black;
     }
     .input-message{
 
@@ -141,7 +145,7 @@
     .users{
         float: left;
         display: inline-block;
-        width: 18%;
+        width: 15%;
         height: 65%;
         color: white;
         padding-left: 3%;
@@ -155,15 +159,114 @@
     }
     .image-formatting{
         background-repeat: no-repeat;
-        align: center;
-        height: 80%;
-        width: 80%;
+        height: auto;
+        width: 40%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
     #enter-message{
 
     }
     #sign-in-block{
 
+    }
+    .browse{
+        cursor: pointer;
+    }
+    .input-file{
+        cursor: pointer;
+    }
+    .userfield{
+        background-color: white;
+    }
+    #message-list{
+        padding: 0;
+        margin-left: 16%;
+        overflow-x: hidden;
+    }
+    .panel-body{
+        padding: 0;
+        min-height: 50px;
+    }
+    .messageUser{
+        color: #000000;
+        font-size: 20px;
+    }
+    .messageText{
+        height: 100%;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+        font-size: 15px;
+        padding: 15px;
+        font-family: serif;
+        background-color: white;
+    }
+    .messageRow{
+        height: 50px;
+        margin: 5px 10px 5px 12px;
+        border-radius: 5px;
+    }
+    .messageAuthor{
+        background-color: rgb(203, 226, 255);
+        min-height: 100%;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+        font-size: 17px;
+        padding: 13px;
+        font-family: serif;
+    }
+    .messageImage{
+        min-height: 100%;
+        min-width: auto;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        padding: 15px;
+        background-color: white;
+    }
+    .userButton{
+
+    }
+    .topFooter{
+
+    }
+    .topFooterRow{
+        height: 50px;
+        background-color: #e1e1de;
+        margin: 5px 10px 5px 12px;
+        border-radius: 5px;
+    }
+    .introducing{
+        background-color: white;
+        min-height: 100%;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+        font-size: 17px;
+        padding: 13px;
+        font-family: serif;
+    }
+    .topLoginFooter{
+        min-height: 100%;
+        min-width: auto;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        padding: 8px;
+        background-color: rgb(203, 226, 255);
+    }
+    .userOnline{
+        background-color: rgb(240, 106, 106);
+        height: 35px;
+        border-radius: 5px;
+        font-size: 18px;
+        padding: 4px;
+        color: white;
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+    .thisAuthor{
+        background-color: darkgray;
     }
 }
 
@@ -173,10 +276,6 @@
         display: block;
         text-align: center;
         width: 100%;
-    }
-    .photos-block{
-        margin: 0 auto;
-        text-align: center;
     }
     #enter-message{
         margin: 0 auto;
@@ -189,13 +288,20 @@
     .chatBody{
         width: 80%;
     }
-    .hello-user{
-        font-size: 20px;
-    }
     #sign-in-block{
+        min-width: 220px;
+        width: 60%;
+        margin: 0 20%;
+    }
+    #message-list{
+        margin: 0 10%;
         min-width: 300px;
-        width: 90%;
-        margin: 0 5%;
+        width: 80%;
+
+    }
+    .messageRow{
+        width: 80%;
+        margin: 0 auto;
     }
 }
 
