@@ -10,18 +10,16 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
     $scope.thatUser = '';
     $scope.username = Data.username;
 
+    if(Data.username === '' || Data.username === undefined){
+        document.location.href = "/#/";
+    }
     socket.emit('get users');
 
-    socket.on('provide users', function(names){
-        $timeout(function(){
-            for(var i in names){
-                if (names[i] !== Data.username){
-                    users.push(names[i]);
-                }
-
-            }
-        });
-    });
+    $scope.logout = function(){
+        socket.emit('logout', window.localStorage['token']);
+        delete window.localStorage['token'];
+        delete window.localStorage['username'];
+    };
 
     $scope.addMessage = function(expr) {
         if(expr !== '' && expr !== undefined){
@@ -29,7 +27,7 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
                 'user': $scope.username,
                 'message': expr,
                 'type': 'text',
-                'isThis': 'this'
+                'current': 'this'
             };
 
             messages.push(tempMessage);
@@ -67,9 +65,9 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
             'im': url
         };
         if(data.user === Data.username){
-            tempStorage['isThis'] = 'this';
+            tempStorage['current'] = 'this';
         } else {
-            tempStorage['isThis'] = 'that';
+            tempStorage['current'] = 'that';
         }
         $timeout(function(){
             messages.push(tempStorage);
@@ -78,15 +76,15 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
 
     socket.on('username online', function(data){
         $timeout(function(){
-            users.push(data);
+            $scope.users.push(data);
         })
     });
 
     socket.on('username offline', function(data){
         $timeout(function(){
-            for (var i in users) {
-                if(users[i] === data){
-                    users.splice(i,1);
+            for (var i in $scope.users) {
+                if($scope.users[i] === data){
+                    $scope.users.splice(i,1);
                 }
             }
         })
@@ -98,4 +96,16 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
         })
     });
 
+    socket.on('provide users', function(names){
+        $timeout(function(){
+            console.log('3', users);
+            $scope.users = [];
+            for(var i in names){
+                if (names[i] !== Data.username){
+                    $scope.users.push(names[i]);
+                }
+
+            }
+        });
+    });
 });

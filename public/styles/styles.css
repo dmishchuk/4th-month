@@ -8,7 +8,7 @@
         background-position: center top;
         background-repeat: no-repeat;
         width: 100%;
-
+        overflow-x: hidden;
     }
     .main{
         height: 100%;
@@ -24,9 +24,10 @@
         margin-left: 1%;
         margin-bottom: 2%;
         display: inline-block;
+        padding:5px;
     }
     .inputMessageBlock{
-
+        margin: 30px 23px 0 23px;
     }
     .inputMessage{
         width: 60%;
@@ -160,7 +161,7 @@
     .image-formatting{
         background-repeat: no-repeat;
         height: auto;
-        width: 40%;
+        max-width: 40%;
         display: block;
         margin-left: auto;
         margin-right: auto;
@@ -181,9 +182,14 @@
         background-color: white;
     }
     #message-list{
-        padding: 0;
+        padding: 5px;
         width: 100%;
         overflow-x: hidden;
+        border: 1px solid white;
+        border-radius: 5px;
+        background-color: white;
+        margin: 0;
+        margin-top: 5px;
     }
     .panel-body{
         padding: 0;
@@ -194,7 +200,6 @@
         font-size: 20px;
     }
     .messageText{
-        height: 100%;
         border-bottom-right-radius: 5px;
         border-top-right-radius: 5px;
         font-size: 15px;
@@ -203,21 +208,23 @@
         background-color: white;
     }
     .messageRow{
-        height: 50px;
-        margin: 5px 10px 5px 50px;
+        margin: 0;
+        margin-bottom: 5px;
         border-radius: 5px;
+        border: 1px solid #d6e9c6;
+        display: flex;
     }
     .messageAuthor{
         background-color: rgb(203, 226, 255);
-        min-height: 100%;
         border-bottom-left-radius: 5px;
         border-top-left-radius: 5px;
-        font-size: 17px;
+        font-size: 18px;
         padding: 13px;
         font-family: serif;
+        font-weight: bold;
+        margin-left: -2px;
     }
     .messageImage{
-        min-height: 100%;
         min-width: auto;
         border-bottom-right-radius: 5px;
         border-top-right-radius: 5px;
@@ -226,19 +233,18 @@
         background-color: white;
     }
     .userButton{
-
+        display: block;
+        margin-right: 3px;
     }
     .topFooter{
 
     }
-    .topFooterRow{
+    .topHeaderRow{
         height: 50px;
-        background-color: #e1e1de;
         margin: 5px 10px 5px 12px;
         border-radius: 5px;
     }
-    .introducing{
-        background-color: white;
+    .chat-title{
         min-height: 100%;
         border-bottom-left-radius: 5px;
         border-top-left-radius: 5px;
@@ -249,59 +255,95 @@
     .topLoginFooter{
         min-height: 100%;
         min-width: auto;
-        border-bottom-right-radius: 5px;
-        border-top-right-radius: 5px;
-        border-bottom-left-radius: 5px;
+        border-radius: 5px;
         padding: 8px;
         background-color: rgb(203, 226, 255);
     }
     .userOnline{
-        background-color: rgb(240, 106, 106);
-        height: 35px;
+        background-color: rgb(39, 189, 117);
+        height: 28px;
         border-radius: 5px;
-        font-size: 18px;
-        padding: 4px;
+        font-size: 15px;
+        padding: 3px;
         color: white;
         margin-top: 5px;
         margin-left: 5px;
     }
     .thisAuthor{
-        background-color: darkgray;
+        background-color: #d6e9c6;
+    }
+    #user-button{
+        margin: 0 auto;
+        width: 100%;
+        color: white;
+        font-size: 20px;
+        border: 1px solid;
+        border-radius: 5px;
+    }
+    #menu{
+        margin-top: 42px;
+        width: 100%;
+    }
+    .online-panel-content{
+        min-height: 30px;
+        padding: 4px;
+        padding-left: 15px;
+    }
+    .online-panel{
+        margin-top: 5px;
+        margin-right: 5px;
     }
 }
 
-@media screen and (max-width: 800px) {
-    .messagePretextBlock{
-        margin: 5px 0;
-        display: block;
-        text-align: center;
-        width: 100%;
+@media screen and (max-width: 1000px) {
+    .userOnline{
+        height: 20px;
+        font-size: 10px;
+        width: 100px;
+    }
+    .topFooter{
+        margin: 0 10%;
+        width: 80%;
+    }
+    .chat-title{
+        border-radius: 5px;
+    }
+    .topLoginFooter{
+        border-radius: 5px;
+        width: 50%;
+        margin: 0 auto;
+    }
+    #message-list{
+        margin-top: 50px;
+    }
+    .messageRow{
+        margin: 5px 10px 5px 10px;
+    }
+    .messageAuthor{
+        width: 50%
+    max-height: 25px;
+        margin: 0 25%;
+        height: 50%;
+        padding: 1px;
+        border-radius: 5px;
+        font-size: 15px;
+
+    }
+    .messageText{
+        height: 50%;
+        border-radius: 5px;
+        padding: 3px;
+        font-size: 14px;
+    }
+    .messageImage{
+        border-radius: 5px;
     }
     #enter-message{
-        margin: 0 auto;
-        min-width: 300px;
+        margin: 0 10%;
         width: 80%;
     }
     .inputMessage{
-        min-width: 200px;
-    }
-    .chatBody{
-        width: 80%;
-    }
-    #sign-in-block{
         min-width: 220px;
-        width: 60%;
-        margin: 0 20%;
-    }
-    #message-list{
-        margin: 0 10%;
-        min-width: 300px;
-        width: 80%;
-
-    }
-    .messageRow{
-        width: 80%;
-        margin: 0 auto;
     }
 }
 

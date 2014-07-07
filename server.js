@@ -22,7 +22,7 @@ var VKontakteStrategy = require('passport-vkontakte').Strategy;
 var util = require('util');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-app.use(cookieParser()); // required before session.
+app.use(cookieParser());
 app.use(session({
     secret: 'secret'
 }));
@@ -33,7 +33,7 @@ var randtoken = require('rand-token');
 var frondFilePath = '';
 
 app.use(express.bodyParser());
-//app.use(express.multipart());
+
 passport.use(new VKontakteStrategy({
         clientID:     4399146, // VK.com docs call it 'API ID'
         clientSecret: 'S0mZdZroSsz2ShGYkWob',
@@ -43,8 +43,8 @@ passport.use(new VKontakteStrategy({
         vkName = profile.displayName;
     }
 ));
-app.get('/auth/vkontakte', passport.authenticate('vkontakte'));
 
+app.get('/auth/vkontakte', passport.authenticate('vkontakte'));
 
 app.post('/fileupload', function (req, res) {
     var uploadFilePath = req.files.file.path;
@@ -91,6 +91,7 @@ io.on('connection', function (socket) {
         {
             if(i === data['token']){
                 if(username[i] = data['username']){
+                    users.push(username[i]);
                     exist = true;
                     socket.emit('user exist true',{
                         'user': username[i],
@@ -107,10 +108,25 @@ io.on('connection', function (socket) {
         }
     });
 
+    socket.on('logout', function(logoutToken){
+        for(var i in username){
+            if(i === logoutToken){
+                for(k in users){
+                    if(users[k] === username[i]){
+                        users.splice(k,1);
+                    }
+                }
+                socket.broadcast.emit('provide users', users);
+                delete username[i];
+            }
+        }
+    });
+
     socket.on('vk-pressed', function(){
         function temp(){
             if(vkName !== ''){
                 socket.emit('vk-successful', vkName);
+
             }
         }
         setTimeout(temp, 1000);
@@ -146,7 +162,7 @@ io.on('connection', function (socket) {
                 users.push(login);
             });
         }
-
+        socket.emit('provide users', users);
     });
 
     socket.on('file loading', function(username){
@@ -163,7 +179,7 @@ io.on('connection', function (socket) {
             message: data['mes'],
             user: data['user'],
             type: 'text',
-            isThis: 'that'
+            current: 'that'
         });
     });
 

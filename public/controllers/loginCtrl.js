@@ -23,13 +23,13 @@ angular.module('myUser').controller('LoginController', function ($scope, Data, $
         }
     };
 
+
     $scope.addVkLogin = function(event){
         socket.emit('vk-pressed');
         socket.on('vk-successful', function (login) {
             Data.username = login;
             socket.emit('login entered', login);
         });
-
     };
 
     socket.on('user exist true', function(data){
