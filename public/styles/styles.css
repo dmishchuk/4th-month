@@ -279,6 +279,9 @@
         font-size: 20px;
         border: 1px solid;
         border-radius: 5px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
     #menu{
         margin-top: 42px;
@@ -296,47 +299,9 @@
 }
 
 @media screen and (max-width: 1000px) {
-    .userOnline{
-        height: 20px;
-        font-size: 10px;
-        width: 100px;
-    }
     .topFooter{
-        margin: 0 10%;
-        width: 80%;
-    }
-    .chat-title{
-        border-radius: 5px;
-    }
-    .topLoginFooter{
-        border-radius: 5px;
-        width: 50%;
-        margin: 0 auto;
-    }
-    #message-list{
-        margin-top: 50px;
-    }
-    .messageRow{
-        margin: 5px 10px 5px 10px;
-    }
-    .messageAuthor{
-        width: 50%
-    max-height: 25px;
-        margin: 0 25%;
-        height: 50%;
-        padding: 1px;
-        border-radius: 5px;
-        font-size: 15px;
-
-    }
-    .messageText{
-        height: 50%;
-        border-radius: 5px;
-        padding: 3px;
-        font-size: 14px;
-    }
-    .messageImage{
-        border-radius: 5px;
+        padding: 0;
+        padding-right: 8%;
     }
     #enter-message{
         margin: 0 10%;
@@ -344,6 +309,19 @@
     }
     .inputMessage{
         min-width: 220px;
+    }
+    .messageAuthor{
+        min-width: 100px;
+        font-size: 15px;
+        padding-top: 15px;
+    }
+    #online{
+        width: 62%;
+        margin: 0 19%;
+        display: block;
+    }
+    #message-list{
+        height: 60%;
     }
 }
 
