@@ -98,7 +98,6 @@ angular.module('myUser').controller('MessageController', function ($scope, Data,
 
     socket.on('provide users', function(names){
         $timeout(function(){
-            console.log('3', users);
             $scope.users = [];
             for(var i in names){
                 if (names[i] !== Data.username){

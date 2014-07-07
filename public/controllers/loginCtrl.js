@@ -54,7 +54,7 @@ angular.module('myUser').controller('LoginController', function ($scope, Data, $
     });
 
     socket.on('successful login', function(){
-        document.location.href = "/#/chat";
+        document.location.href = '/#/chat';
     });
 
     socket.on('if token valid', function(data){

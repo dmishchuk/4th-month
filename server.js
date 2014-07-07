@@ -4,8 +4,8 @@
 var passport = require('passport');
 var VKontakteStrategy = require('passport-vkontakte').Strategy;
 var http = require('http');
-var config = require("nconf");
-var crypto = require("crypto");
+var config = require('nconf');
+var crypto = require('crypto');
 var express = require('express.io');
 var fs = require('fs');
 var app = express();
@@ -37,7 +37,7 @@ app.use(express.bodyParser());
 passport.use(new VKontakteStrategy({
         clientID:     4399146, // VK.com docs call it 'API ID'
         clientSecret: 'S0mZdZroSsz2ShGYkWob',
-        callbackURL:  "http://localhost:1000/auth/vk/callback"
+        callbackURL:  'http://localhost:1000/auth/vk/callback'
     },
     function(accessToken, refreshToken, profile, done) {
         vkName = profile.displayName;
@@ -54,7 +54,7 @@ app.post('/fileupload', function (req, res) {
     frondFilePath = '/uploads/' + uploadFileName;
     fs.readFile(uploadFilePath, function (err, data) {
         fs.writeFile(filePath, data, function (err) {
-            res.redirect("back");
+            res.redirect('back');
         });
     });
 });
