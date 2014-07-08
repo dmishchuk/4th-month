@@ -1,9 +1,9 @@
 /**
  * Created by dmishchuk on 26/06/2014.
  */
-angular.module('myUser').controller('MessageController', function ($scope, Data, $timeout, $upload){
+angular.module('myChat').controller('MessageController', function ($scope, Data, $timeout, $upload, socket){
 
-    var socket = io.connect();
+    //var socket = io.connect();
     var messages = $scope.messages = [];
     var images = $scope.images = [];
     var users = $scope.users = [];

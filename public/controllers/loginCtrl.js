@@ -1,10 +1,10 @@
 /**
  * Created by dmishchuk on 26/06/2014.
  */
-angular.module('myUser').controller('LoginController', function ($scope, Data, $timeout){
+angular.module('myChat').controller('LoginController', function ($scope, Data, $timeout, socket){
 
 
-    var socket = io.connect();
+    //var socket = io.connect();
     $scope['data'] = {};
 
     if(window.localStorage.token !== '' && window.localStorage.token !== undefined){

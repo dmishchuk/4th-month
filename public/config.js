@@ -1,4 +1,4 @@
-angular.module('myUser').config(['$routeProvider',function($routeProvider){
+angular.module('myChat').config(['$routeProvider',function($routeProvider){
     $routeProvider
         .when('/', {
             templateUrl: 'views/login.html',
