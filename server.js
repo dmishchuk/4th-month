@@ -39,7 +39,7 @@ passport.use(new VKontakteStrategy({
         clientSecret: 'S0mZdZroSsz2ShGYkWob',
         callbackURL:  'http://localhost:1000/auth/vk/callback'
     },
-    function(accessToken, refreshToken, profile, done) {
+    function (accessToken, refreshToken, profile, done) {
         vkName = profile.displayName;
     }
 ));
@@ -73,7 +73,7 @@ passport.deserializeUser(function (data, done) {
 
 app.get('/auth/vk/callback',
     passport.authenticate('vkontakte'),
-    function(req, res){
+    function (req, res) {
 
     });
 
@@ -83,17 +83,18 @@ server.listen(1000, function () {
 app.use(express.static(__dirname + '/public'));
 
 io.on('connection', function (socket) {
+
     vkName = '';
 
-    socket.on('token exist', function(data){
+    socket.on('token exist', function (data) {
         var exist = false;
         for(var i in username)
         {
-            if(i === data['token']){
-                if(username[i] = data['username']){
+            if(i === data['token']) {
+                if(username[i] = data['username']) {
                     users.push(username[i]);
                     exist = true;
-                    socket.emit('user exist true',{
+                    socket.emit('user exist true', {
                         'user': username[i],
                         'token': i
                     });
@@ -103,16 +104,16 @@ io.on('connection', function (socket) {
                 }
             }
         }
-        if(!exist){
+        if(!exist) {
             socket.emit('user exist false');
         }
     });
 
-    socket.on('logout', function(logoutToken){
-        for(var i in username){
-            if(i === logoutToken){
-                for(k in users){
-                    if(users[k] === username[i]){
+    socket.on('logout', function (logoutToken) {
+        for(var i in username) {
+            if(i === logoutToken) {
+                for(k in users) {
+                    if(users[k] === username[i]) {
                         users.splice(k,1);
                     }
                 }
@@ -122,8 +123,8 @@ io.on('connection', function (socket) {
         }
     });
 
-    socket.on('vk-pressed', function(){
-        function temp(){
+    socket.on('vk-pressed', function () {
+        function temp () {
             if(vkName !== ''){
                 socket.emit('vk-successful', vkName);
 
@@ -135,12 +136,12 @@ io.on('connection', function (socket) {
     socket.on('login entered', function (login) {
         var unique = true;
         for(var i in username) {
-            if(username[i] === login){
+            if(username[i] === login) {
                 var tempToken = i;
                 unique = false;
             }
         }
-        if(unique){
+        if(unique) {
             var token = randtoken.generate(16);
             username[token] = login;
             socket.emit('login send', username);
@@ -151,10 +152,10 @@ io.on('connection', function (socket) {
             users.push(login);
         } else {
             socket.emit('if token valid', tempToken);
-            socket.on('token not valid', function(){
+            socket.on('token not valid', function () {
                 socket.emit('wrong login');
             });
-            socket.on('token valid', function(){
+            socket.on('token valid', function () {
                 socket.emit('successful login');
                 socket.broadcast.emit('username online', login);
                 addedUser = true;
@@ -165,7 +166,7 @@ io.on('connection', function (socket) {
         socket.emit('provide users', users);
     });
 
-    socket.on('file loading', function(username){
+    socket.on('file loading', function (username) {
         var imMessage = {
             'user': username,
             'fileSource': frondFilePath
@@ -183,7 +184,7 @@ io.on('connection', function (socket) {
         });
     });
 
-    socket.on('get users', function(){
+    socket.on('get users', function () {
         socket.emit('provide users', users);
     });
 

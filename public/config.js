@@ -1,4 +1,6 @@
-angular.module('myChat').config(['$routeProvider',function($routeProvider){
+
+angular.module('myChat').config(['$routeProvider', function ($routeProvider) {
+
     $routeProvider
         .when('/', {
             templateUrl: 'views/login.html',
@@ -8,7 +10,5 @@ angular.module('myChat').config(['$routeProvider',function($routeProvider){
             templateUrl: 'views/chat.html',
             controller: 'MessageController'
         });
-        /*.otherwise({
-            redirectTo: '/'
-        })*/
+
 }]);

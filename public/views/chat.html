@@ -1,11 +1,9 @@
 <div class="main">
-    <div class="topFooter col-xs-9 col-sm-9 col-md-9 col-xs-offset-2 col-sm-offset-2 col-md-offset-2">
-        <div class="row topHeaderRow">
-            <div class="col-md-8 chat-title">
 
-            </div>
-            <div class="col-md-3">
-                <div class="btn-group userButton" dropdown is-open="status.isopen">
+    <div class="top-header col-xs-9 col-sm-9 col-md-9 col-xs-offset-2 col-sm-offset-2 col-md-offset-2">
+        <div class="row top-header-row">
+            <div class="col-md-3 col-md-offset-8">
+                <div class="btn-group user-log" dropdown is-open="status.isopen">
                     <button type="button" class="btn btn-link dropdown-toggle" id="user-button">
                         <span class="glyphicon glyphicon-user"></span>{{' '+username}}
                         <span class="caret"></span>
@@ -22,17 +20,16 @@
 
     <div class="row">
 
-
         <div class="col-xs-8 col-sm-8 col-md-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2">
-            <div class="chatBody" id="message-list">
-                <div class="row messageRow" ng-repeat="mes in messages" ng-switch="mes.type">
-                    <div class="col-md-2 messageAuthor {{(mes.current=='this')?'thisAuthor':''}}" >
+            <div class="chat-body" id="message-list">
+                <div class="row message-row" ng-repeat="mes in messages" ng-switch="mes.type">
+                    <div class="col-md-2 message-author {{(mes.current=='this')?'this-author':''}}" >
                         <span  class="pull-right">{{mes.user}}</span>
                     </div>
-                    <div class="messageText col-md-10" ng-switch-when="text">
+                    <div class="message-text col-md-10" ng-switch-when="text">
                         {{mes.message}}
                     </div>
-                    <div class="messageImage col-md-10" ng-switch-when="image">
+                    <div class="message-image col-md-10" ng-switch-when="image">
                         <a href="{{mes.im}}" target="_blank">
                             <img class="image-formatting" src="{{mes.im}}">
                         </a>
@@ -40,6 +37,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-xs-2 col-sm-2 col-md-2" id="online">
             <div class="panel panel-success online-panel">
                 <div class="panel-heading">
@@ -50,10 +48,10 @@
                 </div>
             </div>
         </div>
+
     </div>
 
-
-    <div class="inputMessageBlock">
+    <div class="input-message-block">
         <div class="row">
             <div class="input-group col-xs-8 col-sm-8 col-md-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2" id="enter-message">
                     <span class="input-group-addon">
@@ -62,10 +60,10 @@
                             <input type="file" class="input-file" ng-file-select="addImage($files)">
                         </button>
                     </span>
-                <textarea autogrow autofocus wrap="soft" type="text" class="form-control inputMessage" ng-model="mes" ng-keydown="addMessageByKey($event, mes)"></textarea>
+                <textarea autogrow autofocus wrap="soft" type="text" class="form-control input-message" ng-model="mes" ng-keydown="addMessageByKey($event, mes)"></textarea>
                 <span  class="input-group-addon" id="send-message" ng-click="addMessage(mes)"><span class="glyphicon glyphicon-share-alt"></span></span>
             </div>
         </div>
     </div>
-</div>
+
 </div>
