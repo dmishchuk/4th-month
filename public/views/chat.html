@@ -57,7 +57,7 @@
                     <span class="input-group-addon">
                         <button class="file-input-wrapper btn  btn-lg browse">
                             <span class="glyphicon glyphicon-upload"></span>
-                            <input type="file" class="input-file" ng-file-select="addImage($files)">
+                            <input type="file" class="input-file" ng-file-select="addImage($files)" accept="image/jpeg,image/png,image/gif,image/jpg">
                         </button>
                     </span>
                 <textarea autogrow autofocus wrap="soft" type="text" class="form-control input-message" ng-model="mes" ng-keydown="addMessageByKey($event, mes)"></textarea>

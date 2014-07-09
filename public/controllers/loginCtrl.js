@@ -5,7 +5,7 @@
 angular.module('myChat').controller('LoginController', function ($scope, Data, $timeout, socket) {
 
     $scope['data'] = {};
-
+    $scope.placeholder = 'Enter login';
     if(window.localStorage.token !== '' && window.localStorage.token !== undefined) {
         var tempToken = window.localStorage.token;
         var user = window.localStorage.username;
@@ -65,7 +65,8 @@ angular.module('myChat').controller('LoginController', function ($scope, Data, $
 
     socket.on('wrong login', function () {
         $timeout( function () {
-            $scope.data.login = 'enter another username';
+            $scope.data.login = '';
+            $scope.placeholder = 'Enter another username';
         })
     });
 
