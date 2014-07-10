@@ -1,50 +1,32 @@
 /**
  * Created by dima on 26.05.2014.
  */
-var passport = require('passport');
-var VKontakteStrategy = require('passport-vkontakte').Strategy;
+
 var http = require('http');
-var config = require('nconf');
 var crypto = require('crypto');
 var express = require('express.io');
 var fs = require('fs');
 var app = express();
-var md5 = require('md5');
 var server = http.createServer(app);
-var io = require('socket.io')(server);
+var io = require('socket.io').listen(server);
 var users = [];
 var username = {};
-var log = {};
 var addedUser;
-var mongoose = require('mongoose');
 var passport = require('passport');
-var VKontakteStrategy = require('passport-vkontakte').Strategy;
-var util = require('util');
+var passportAuth = require('./vk-auth');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 app.use(cookieParser());
 app.use(session({
     secret: 'secret'
 }));
-var vkName = '';
 app.use(passport.initialize());
 app.use(passport.session());
 var randtoken = require('rand-token');
 var frondFilePath = '';
-
 app.use(express.bodyParser());
 
-passport.use(new VKontakteStrategy({
-        clientID:     4399146, // VK.com docs call it 'API ID'
-        clientSecret: 'S0mZdZroSsz2ShGYkWob',
-        callbackURL:  'http://localhost:1000/auth/vk/callback'
-    },
-    function (accessToken, refreshToken, profile, done) {
-        vkName = profile.displayName;
-    }
-));
-
-app.get('/auth/vkontakte', passport.authenticate('vkontakte'));
+app.get('/auth/vkontakte', passportAuth.auth());
 
 app.post('/fileupload', function (req, res) {
     var uploadFilePath = req.files.file.path;
@@ -74,7 +56,7 @@ passport.deserializeUser(function (data, done) {
 app.get('/auth/vk/callback',
     passport.authenticate('vkontakte'),
     function (req, res) {
-
+        console.log(req.user);
     });
 
 server.listen(1000, function () {
@@ -82,9 +64,8 @@ server.listen(1000, function () {
 });
 app.use(express.static(__dirname + '/public'));
 
-io.on('connection', function (socket) {
 
-    vkName = '';
+io.on('connection', function (socket) {
 
     socket.on('token exist', function (data) {
         var exist = false;
@@ -94,11 +75,11 @@ io.on('connection', function (socket) {
                 if(username[i] = data['username']) {
                     users.push(username[i]);
                     exist = true;
+
                     socket.emit('user exist true', {
                         'user': username[i],
                         'token': i
                     });
-                    socket.emit('login send', username);
                     socket.emit('successful login');
                     socket.broadcast.emit('username online', username[i]);
                 }
@@ -125,9 +106,9 @@ io.on('connection', function (socket) {
 
     socket.on('vk-pressed', function () {
         function temp () {
+            var vkName = passportAuth.getVkName();
             if(vkName !== ''){
                 socket.emit('vk-successful', vkName);
-
             }
         }
         setTimeout(temp, 1000);
